@@ -25,9 +25,9 @@ import (
 	"golang.org/x/crypto/ssh"
 
 	"github.com/gravitational/teleport"
+	"github.com/gravitational/teleport/lib/auth"
 	"github.com/gravitational/teleport/lib/auth/test"
 	"github.com/gravitational/teleport/lib/defaults"
-	"github.com/gravitational/teleport/lib/services"
 	"github.com/gravitational/teleport/lib/utils"
 
 	"github.com/jonboulle/clockwork"
@@ -170,7 +170,7 @@ func (s *NativeSuite) TestBuildPrincipals(c *check.C) {
 	for _, tt := range tests {
 		c.Logf("Running test case: %q", tt.desc)
 		hostCertificateBytes, err := s.suite.A.GenerateHostCert(
-			services.HostCertParams{
+			auth.HostCertParams{
 				PrivateCASigningKey: caPrivateKey,
 				CASigningAlg:        defaults.CASignatureAlgorithm,
 				PublicHostKey:       hostPublicKey,
@@ -218,7 +218,7 @@ func (s *NativeSuite) TestUserCertCompatibility(c *check.C) {
 	for i, tt := range tests {
 		comment := check.Commentf("Test %v", i)
 
-		userCertificateBytes, err := s.suite.A.GenerateUserCert(services.UserCertParams{
+		userCertificateBytes, err := s.suite.A.GenerateUserCert(auth.UserCertParams{
 			PrivateCASigningKey:   priv,
 			CASigningAlg:          defaults.CASignatureAlgorithm,
 			PublicUserKey:         pub,

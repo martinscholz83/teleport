@@ -45,7 +45,7 @@ proxy must have `kube_listen_addr` set and optionally `kube_public_addr` set.
 
 - Options for connecting k8s clusters:
     - `kubernetes_service` in a pod [Using our Helm Chart](https://github.com/gravitational/teleport/blob/master/examples/chart/teleport-kube-agent/README.md)
-    - `kubernetes_service` elsewhere, with kubeconfig. Use [get-kubeconfig.sh](https://github.com/gravitational/teleport/blob/master/examples/k8s-auth/) for building kubeconfigs
+    - `kubernetes_service` elsewhere, with kubeconfig. Use [get-kubeconfig.sh and merge-kubeconfigs.sh](https://github.com/gravitational/teleport/blob/master/examples/k8s-auth/) for building kubeconfigs
 
 There are two options for setting up Teleport to access Kubernetes:
 
@@ -421,8 +421,10 @@ Teleport 5.0 adds the [long requested feature](https://github.com/gravitational/
 of supporting multiple Kubernetes Clusters via a single Teleport Root. This setup is
 described in Option 1 and uses reverse tunnels to connect back to the root cluster.
 
-Teleport provides an option for running a single Teleport instance. This can be done
-using Option 2 and a kubeconfig with multiple entries.
+Teleport provides an option for running a single Teleport instance. This can be
+done using Option 2 and a single kubeconfig with multiple entries. You can
+combine multiple kubeconfig files into one using
+[merge-kubeconfigs.sh](https://github.com/gravitational/teleport/blob/master/examples/k8s-auth/merge-kubeconfigs.sh).
 
 ## Multiple Kubernetes Clusters via Trusted Cluster
 

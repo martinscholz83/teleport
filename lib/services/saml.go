@@ -181,7 +181,8 @@ func GetSAMLServiceProvider(sc SAMLConnector, clock clockwork.Clock) (*saml2.SAM
 	}
 
 	// adfs specific settings
-	if sc.GetAudience() == teleport.ADFS {
+	if sc.GetProvider() == teleport.ADFS {
+		log.Debug("[SAML] setting ADFS values")
 		if sp.SignAuthnRequests {
 			// adfs does not support C14N11, we have to use the C14N10 canonicalizer
 			sp.SignAuthnRequestsCanonicalizer = dsig.MakeC14N10ExclusiveCanonicalizerWithPrefixList(dsig.DefaultPrefix)

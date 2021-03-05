@@ -9,9 +9,9 @@ environment:
   GID: 1000
 
 trigger:
-  event:
-    include:
-      - pull_request
+  #event:
+  #  include:
+  #    - pull_request
   repo:
     include:
       - gravitational/*
@@ -221,9 +221,9 @@ type: kubernetes
 name: test-docs-internal
 
 trigger:
-  event:
-    include:
-      - pull_request
+  #event:
+  #  include:
+  #    - pull_request
   repo:
     include:
       - gravitational/*
@@ -306,9 +306,9 @@ type: kubernetes
 name: test-docs-external
 
 trigger:
-  event:
-    include:
-      - pull_request
+  #event:
+  #  include:
+  #    - pull_request
   repo:
     include:
       - gravitational/*
@@ -991,12 +991,13 @@ steps:
 
   - name: Pull boringcrypto build tarball from S3
     environment:
-      AWS_S3_BUCKET: builds.gravitational.io
+      AWS_S3_BUCKET:
+        from_secret: AWS_S3_BUCKET
       AWS_ACCESS_KEY_ID:
         from_secret: AWS_ACCESS_KEY_ID
       AWS_SECRET_ACCESS_KEY:
         from_secret: AWS_SECRET_ACCESS_KEY
-      AWS_REGION: us-east-1
+      AWS_REGION: us-west-2
       BORINGCRYPTO_BRANCH: dev.boringcrypto.go1.15
       SDK_DIR: /Users/build/sdks/dev.boringcrypto.go1.15
       GODL_DIR: /tmp/push-build-darwin-amd64-fips/go/src/github.com/gravitational/godl
@@ -4647,6 +4648,6 @@ volumes:
 
 ---
 kind: signature
-hmac: e32c19eb65b315aeb37983f97a33da798dbbc35dd5b7589d75c305a98d9dea20
+hmac: 0c0e3b0a39d82566599a4319a5e711a32428cdfae188d4e1c1c01d83eb69601f
 
 ...

@@ -469,6 +469,16 @@ const MaxEnvironmentFileLines = 1000
 // typically only enforced against resources that are likely to arbitrarily grow (e.g. PluginData).
 const MaxResourceSize = 1000000
 
+// MaxHTTPRequestSize is the maximum accepted size (in bytes) of the body of
+// a received HTTP request.  This limit is meant to be used with utils.ReadAtMost
+// to prevent resource exhaustion attacks.
+const MaxHTTPRequestSize = 10 * 1024 * 1024
+
+// MaxHTTPResponseSize is the maximum accepted size (in bytes) of the body of
+// a received HTTP response.  This limit is meant to be used with utils.ReadAtMost
+// to prevent resource exhaustion attacks.
+const MaxHTTPResponseSize = 10 * 1024 * 1024
+
 const (
 	// CertificateFormatOldSSH is used to make Teleport interoperate with older
 	// versions of OpenSSH.
@@ -545,9 +555,6 @@ const Root = "root"
 // AdminRoleName is the name of the default admin role for all local users if
 // another role is not explicitly assigned (Enterprise only).
 const AdminRoleName = "admin"
-
-// OSSUserRoleName is a role created for open source user
-const OSSUserRoleName = "ossuser"
 
 // OSSMigratedV6 is a label to mark migrated OSS users and resources
 const OSSMigratedV6 = "migrate-v6.0"
